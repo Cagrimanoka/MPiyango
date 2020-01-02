@@ -4,13 +4,18 @@ from ast import literal_eval
 
 OYUN_SAYISI = 5
 
-piyango = 0
-sanstopu = 1
-onnumara = 2
-sayisal = 3
-superloto = 4
+class Turler:
+    def __init__(self):
+        self.piyango = 0
+        self.sanstopu = 1
+        self.onnumara = 2
+        self.sayisal = 3
+        self.superloto = 4
 
-turler = [piyango, sanstopu, onnumara, sayisal, superloto]
+
+cekilis_turleri = Turler()
+
+turler = [cekilis_turleri.piyango, cekilis_turleri.sanstopu, cekilis_turleri.onnumara, cekilis_turleri.sayisal, cekilis_turleri.superloto]
 tur_linkler = ["piyango", "sanstopu", "onnumara", "sayisal", "superloto"]
 tur_isimler = ["Milli Piyango", "Şans Topu", "On Numara", "Sayısal Loto", "Süper Loto"]
 
@@ -81,8 +86,8 @@ class PiyangoHaneSonuc:
 class PiyangoSonuc:
     """Piyango bilet sonuç sınıfı"""
     def __init__(self, json_str):
-        self.tur = piyango
-        self.tur_str = tur_isimler[piyango]
+        self.tur = cekilis_turleri.piyango
+        self.tur_str = tur_isimler[cekilis_turleri.piyango]
         s_dict = json.loads(json_str)
         self.ad = s_dict["cekilisAdi"]
         self.tarih = Tarih(s_dict["cekilisTarihi"], f"{s_dict['cekilisTarihi'][0:4]}/{s_dict['cekilisTarihi'][4:6]}/{s_dict['cekilisTarihi'][6:8]}")
@@ -99,8 +104,8 @@ class PiyangoSonuc:
 class SansTopuSonuc:
     """Şans Topu sonuç sınıfı"""
     def __init__(self, json_str):
-        self.tur = sanstopu
-        self.tur_str = tur_isimler[sanstopu]
+        self.tur = cekilis_turleri.sanstopu
+        self.tur_str = tur_isimler[cekilis_turleri.sanstopu]
         s_dict = json.loads(json_str)
         if not s_dict["success"]:
             raise Exception("Bir hata oluştu -  Veri alımı başarısız oldu!")
@@ -161,13 +166,13 @@ def sonuclar(tur, tarih):
     """Verilen türdeki oyunun verilen tarihteki sonucunu verir. Tarihler "Tarih" sınıfı ile verilmediyse YYYYAAGG formatında olmalıdır."""
     if hasattr(tarih, "jsonformat"):
         tarih = tarih.jsonformat
-    if tur != sayisal:
+    if tur != cekilis_turleri.sayisal:
         snc = requests.get(f"http://www.mpi.gov.tr/sonuclar/cekilisler/{tur_linkler[tur]}/{tarih}.json")
     else:
         snc = requests.get(f"http://www.mpi.gov.tr/sonuclar/cekilisler/{tur_linkler[tur]}/SAY_{tarih}.json")
     snct = snc.text
     if not snct.startswith("{"):
-        if tur != sayisal: # Milli Piyango 30.06.2018 ve önceki Sayısal Loto çekilişleri için eski format link kullandığı için
+        if tur != cekilis_turleri.sayisal: # Milli Piyango 30.06.2018 ve önceki Sayısal Loto çekilişleri için eski format link kullandığı için
             raise Exception("Geçersiz tarih - Tarihi kontrol edin!")
         else:
             snc = requests.get(f"http://www.mpi.gov.tr/sonuclar/cekilisler/{tur_linkler[tur]}/{tarih}.json")
@@ -175,9 +180,9 @@ def sonuclar(tur, tarih):
             if not snct.startswith("{"):
                 raise Exception("Geçersiz tarih - Tarihi kontrol edin!")
     else:
-        if tur == piyango:
+        if tur == cekilis_turleri.piyango:
             return PiyangoSonuc(snct)
-        elif tur == sanstopu:
+        elif tur == cekilis_turleri.sayisal:
             return SansTopuSonuc(snct)
         elif tur in range(OYUN_SAYISI):
             return TopSonuc(snct, tur)
