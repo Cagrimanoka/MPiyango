@@ -1,16 +1,21 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-with open("README", 'r') as f:
+with open("README.md", 'r', encoding="utf8") as f:
     long_description = f.read()
 
 setup(
    name='mpiyango',
-   version='0.1',
+   version='0.0.2',
    description='A module to get various lottery data from National Lottery Administration of Turkey (in Turkish)',
    license="MIT",
    long_description=long_description,
-   author='Çağrı Sarp Mirapoğlu',
+   author='Cagrimanoka',
    author_email='cs.mirap@pm.me',
-   packages=['ornekler'],
-   install_requires=['requests']
+   url="https://github.com/Cagrimanoka/MPiyango",
+   classifiers=[
+      "Programming Language :: Python :: 3",
+   ],
+   python_requires='>=3.6',
+   install_requires=['requests'],
+   packages=['mpiyango']
 )
