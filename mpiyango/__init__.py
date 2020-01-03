@@ -21,14 +21,14 @@ tur_isimler = ["Milli Piyango", "Şans Topu", "On Numara", "Sayısal Loto", "Sü
 
 class Tarih:
     def __init__(self, jsonformat, o_format):
-        self.jsonformat = jsonformat
+        self.jsonformat = int(jsonformat)
         self.o_format = o_format
     def __str__(self):
         return self.o_format
     def __repr__(self):
         return self.jsonformat
     def __int__(self):
-        return int(self.jsonformat)
+        return self.jsonformat
 
 class IlIlce:
     def __init__(self, il, ilce):
@@ -42,28 +42,28 @@ class IlIlce:
 class Devir:
     def __init__(self, devir, sayi, tutar):
         self.devir = devir
-        self.sayi = sayi
+        self.sayi = int(sayi)
         if not sayi:
             self.tutar = 0
         else:
-            self.tutar = tutar
-    def __str__(self):
+            self.tutar = float(tutar)
+    def __int__(self):
         return self.tutar
     def d(self):
         return {"devir":self.devir, "devir_sayisi":self.sayi, "devir_tutari":self.tutar}
 
 class Bilen:
     def __init__(self, kisi_basi_ikr, kisi, tur):
-        self.kisibasi = kisi_basi_ikr #Kişi başına düşen ikramiye
-        self.kisi = kisi              #Bilen kişi sayısı
-        self.tur = tur                #Tür
+        self.kisibasi = float(kisi_basi_ikr)   #Kişi başına düşen ikramiye
+        self.kisi = int(kisi)                  #Bilen kişi sayısı
+        self.tur = tur                         #Tür
     def d(self):
         return {"ikramiye": self.kisibasi, "kisi_sayi": self.kisi, "tur": self.tur}
 
 class PiyangoHaneSonuc:
     def __init__(self, numaralar, ikramiye, tip, hanesayisi):
         self.numaralar = sorted(numaralar)
-        self.ikramiye = int(ikramiye)
+        self.ikramiye = float(ikramiye)
         self.tip = tip
         self.hanesayisi = int(hanesayisi)
     def num_ikr(self):
@@ -84,14 +84,14 @@ class PiyangoHaneSonuc:
                 return 0
 
 class PiyangoSonuc:
-    """Piyango bilet sonuç sınıfı"""
+    """Piyango çekilişinin sonucu ve bilgileri"""
     def __init__(self, json_str):
         self.tur = cekilis_turleri.piyango
         self.tur_str = tur_isimler[cekilis_turleri.piyango]
         s_dict = json.loads(json_str)
         self.ad = s_dict["cekilisAdi"]
         self.tarih = Tarih(s_dict["cekilisTarihi"], f"{s_dict['cekilisTarihi'][0:4]}/{s_dict['cekilisTarihi'][4:6]}/{s_dict['cekilisTarihi'][6:8]}")
-        self.hane_sayisi = s_dict["haneSayisi"]
+        self.hane_sayisi = int(s_dict["haneSayisi"])
         self.sonuclar = [PiyangoHaneSonuc(i["numaralar"], i["ikramiye"], i["tip"], i["haneSayisi"]) for i in s_dict["sonuclar"]]
         self.il_ilce = [IlIlce(i["ilView"], i["ilceView"]) for i in s_dict["buyukIkrKazananIlIlceler"]]
     def biletkontrol(self, numara):
@@ -102,7 +102,7 @@ class PiyangoSonuc:
         return [i.num_ikr() for i in self.sonuclar]
 
 class SansTopuSonuc:
-    """Şans Topu sonuç sınıfı"""
+    """Şans Topu çekilişinin sonucu ve bilgileri"""
     def __init__(self, json_str):
         self.tur = cekilis_turleri.sanstopu
         self.tur_str = tur_isimler[cekilis_turleri.sanstopu]
@@ -111,14 +111,14 @@ class SansTopuSonuc:
             raise Exception("Bir hata oluştu -  Veri alımı başarısız oldu!")
         else:
             data = s_dict["data"]
-            self.hafta = data["hafta"]
-            self.tarih = "".join(data["cekilisTarihi"].split("/")[::-1])
-            rkm = data["rakamlar"].split("#")
+            self.hafta = int(data["hafta"])
+            self.tarih = Tarih("".join(data["cekilisTarihi"].split("/")[::-1]), data["cekilisTarihi"])
+            rkm = [int(i) for i in data["rakamlar"].split("#")]
             self.rakamlar = sorted(rkm[:-1]) + rkm[-1:]
             self.sanslirakam = rkm[-1:]
             self.sonuc = self.rakamlar
             self.devir = Devir(data["devretti"], data["devirSayisi"], data["haftayaDevredenTutar"])
-            self.hasilat = data["hasilat"]
+            self.hasilat = float(data["hasilat"])
             self.bilenler = [Bilen(i["kisiBasinaDusenIkramiye"], i["kisiSayisi"], i["tur"]) for i in data["bilenKisiler"]]
             self.il_ilce = [IlIlce(i["ilView"], i["ilceView"]) for i in data["buyukIkrKazananIlIlceler"]]
     def devird(self):
@@ -129,7 +129,7 @@ class SansTopuSonuc:
         return [bilen.d() for bilen in self.bilenler]
 
 class TopSonuc:
-    """Diğer Oyunlar (On Numara, Süper Loto vs.) sonuç sınıfı"""
+    """Diğer çekilişlerin sonuçları ve bilgileri"""
     def __init__(self, json_str, tur):
         self.tur = tur
         self.tur_str = tur_isimler[tur]
@@ -138,12 +138,12 @@ class TopSonuc:
             raise Exception("Bir hata oluştu -  Veri alımı başarısız oldu!")
         else:
             data = s_dict["data"]
-            self.hafta = data["hafta"]
-            self.tarih = "".join(data["cekilisTarihi"].split("/")[::-1])
-            self.rakamlar = sorted(data["rakamlar"].split("#"))
+            self.hafta = int(data["hafta"])
+            self.tarih = Tarih("".join(data["cekilisTarihi"].split("/")[::-1]), data["cekilisTarihi"])
+            self.rakamlar = sorted([int(i) for i in data["rakamlar"].split("#")])
             self.sonuc = self.rakamlar
             self.devir = Devir(data["devretti"], data["devirSayisi"], data["haftayaDevredenTutar"])
-            self.hasilat = data["hasilat"]
+            self.hasilat = float(data["hasilat"])
             self.bilenler = [Bilen(i["kisiBasinaDusenIkramiye"], i["kisiSayisi"], i["tur"]) for i in
                              data["bilenKisiler"]]
             self.il_ilce = [IlIlce(i["ilView"], i["ilceView"]) for i in data["buyukIkrKazananIlIlceler"]]
@@ -158,14 +158,16 @@ class TopSonuc:
 
 
 def tarihler(tur):
-    """Verilen türdeki oyunun www.mpi.gov.tr sitesinde sonuçları olan tarihlerini "Tarih" sınıfı içerisinde verir. Türler "mpiyango.(tür)" ile de belirtilebilir."""
+    """Verilen türdeki çekilişin www.mpi.gov.tr sitesinde sonuçları olan tarihlerini "Tarih" sınıfı içerisinde verir. Türler "mpiyango.cekilis_turleri.(tür)" ile de belirtilebilir."""
     trh = literal_eval(requests.get(f"http://www.mpi.gov.tr/sonuclar/listCekilisleriTarihleri.php?tur={tur_linkler[tur]}").text[1:])
     return [Tarih(i["tarih"], i["tarihView"]) for i in trh]
 
 def sonuclar(tur, tarih):
-    """Verilen türdeki oyunun verilen tarihteki sonucunu verir. Tarihler "Tarih" sınıfı ile verilmediyse YYYYAAGG formatında olmalıdır."""
+    """Verilen türdeki çekilişin verilen tarihteki sonucunu verir. Tarihler "Tarih" sınıfı ile verilmediyse YYYYAAGG formatında olmalıdır."""
     if hasattr(tarih, "jsonformat"):
         tarih = tarih.jsonformat
+    else:
+        tarih = int(tarih)
     if tur != cekilis_turleri.sayisal:
         snc = requests.get(f"http://www.mpi.gov.tr/sonuclar/cekilisler/{tur_linkler[tur]}/{tarih}.json")
     else:
