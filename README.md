@@ -104,13 +104,9 @@ Diğer çekilişlerin sonuçları ve bilgileri.
 
 ### mpiyango.tarihler(`mpiyango.cekilis_turleri.x`)
 
- - Verilen türdeki çekilişin [Milli Piyango İdaresi](www.mpi.gov.tr) sitesinde sonuçları olan tarihlerini "Tarih" sınıfı içerisinde verir. Türler "mpiyango.(tür)" ile de belirtilebilir.
+ - Verilen türdeki çekilişin www.mpi.gov.tr sitesinde sonuçları olan tarihlerini "Tarih" sınıfı içerisinde verir. Türler "mpiyango.(tür)" ile de belirtilebilir.
  
 ### mpiyango.sonuclar(`mpiyango.cekilis_turleri.x`, tarih(str/int/Tarih))
 
 - Verilen türdeki oyunun verilen tarihteki sonucunu verir. Tarihler `Tarih` sınıfı ile verilmediyse `YYYYAAGG` formatında *str* ya da *int* olmalıdır.
 Yazılacak.
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ3NzQ0NzAxOF19
--->
