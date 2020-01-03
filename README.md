@@ -109,3 +109,8 @@ Diğer çekilişlerin sonuçları ve bilgileri.
 ### mpiyango.sonuclar(`mpiyango.cekilis_turleri.x`, tarih(str/int/Tarih))
 
 - Verilen türdeki oyunun verilen tarihteki sonucunu verir. Tarihler `Tarih` sınıfı ile verilmediyse `YYYYAAGG` formatında *str* ya da *int* olmalıdır.
+Yazılacak.
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTQ3NzQ0NzAxOF19
+-->
