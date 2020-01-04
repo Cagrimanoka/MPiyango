@@ -5,7 +5,7 @@ with open("README.md", 'r', encoding="utf8") as f:
 
 setup(
    name='mpiyango',
-   version='0.0.4',
+   version='0.0.5',
    description='A module to get various lottery data from National Lottery Administration of Turkey (in Turkish)',
    license="MIT",
    long_description=long_description,
