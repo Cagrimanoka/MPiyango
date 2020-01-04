@@ -15,7 +15,7 @@
 # Örnekler
 Basit derecede örnekler için /ornekler konumuna bakabilirsiniz.
 
-# Dokümantasyon (v0.0.4)
+# Dokümantasyon (v0.0.5)
 ## Çekiliş Türleri
 
  - `mpiyango.cekilis_turleri.piyango` (Piyango)
