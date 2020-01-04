@@ -112,7 +112,7 @@ class SansTopuSonuc:
         else:
             data = s_dict["data"]
             self.hafta = int(data["hafta"])
-            self.tarih = Tarih("".join(data["cekilisTarihi"].split("/")[::-1]), data["cekilisTarihi"])
+            self.tarih = Tarih("".join(data["cekilisTarihi"].replace("-","/").split("/")[::-1]), data["cekilisTarihi"])
             rkm = [int(i) for i in data["rakamlar"].split("#")]
             self.rakamlar = sorted(rkm[:-1]) + rkm[-1:]
             self.sanslirakam = rkm[-1:]
@@ -139,7 +139,7 @@ class TopSonuc:
         else:
             data = s_dict["data"]
             self.hafta = int(data["hafta"])
-            self.tarih = Tarih("".join(data["cekilisTarihi"].split("/")[::-1]), data["cekilisTarihi"])
+            self.tarih = Tarih("".join(data["cekilisTarihi"].replace("-","/").split("/")[::-1]), data["cekilisTarihi"])
             self.rakamlar = sorted([int(i) for i in data["rakamlar"].split("#")])
             self.sonuc = self.rakamlar
             self.devir = Devir(data["devretti"], data["devirSayisi"], data["haftayaDevredenTutar"])
@@ -158,7 +158,7 @@ class TopSonuc:
 
 
 def tarihler(tur):
-    """Verilen türdeki çekilişin www.mpi.gov.tr sitesinde sonuçları olan tarihlerini "Tarih" sınıfı içerisinde verir. Türler "mpiyango.cekilis_turleri.(tür)" ile de belirtilebilir."""
+    """Verilen türdeki çekilişin www.mpi.gov.tr sitesinde sonuçları olan tarihlerini "Tarih" sınıfı içerisinde verir."""
     trh = literal_eval(requests.get(f"http://www.mpi.gov.tr/sonuclar/listCekilisleriTarihleri.php?tur={tur_linkler[tur]}").text[1:])
     return [Tarih(i["tarih"], i["tarihView"]) for i in trh]
 
