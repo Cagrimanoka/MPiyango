@@ -86,6 +86,7 @@ class PiyangoHaneSonuc:
 class PiyangoSonuc:
     """Piyango çekilişinin sonucu ve bilgileri"""
     def __init__(self, json_str):
+        self.j_data = json_str
         self.tur = cekilis_turleri.piyango
         self.tur_str = tur_isimler[cekilis_turleri.piyango]
         s_dict = json.loads(json_str)
@@ -104,6 +105,7 @@ class PiyangoSonuc:
 class SansTopuSonuc:
     """Şans Topu çekilişinin sonucu ve bilgileri"""
     def __init__(self, json_str):
+        self.j_data = json_str
         self.tur = cekilis_turleri.sanstopu
         self.tur_str = tur_isimler[cekilis_turleri.sanstopu]
         s_dict = json.loads(json_str)
@@ -119,6 +121,7 @@ class SansTopuSonuc:
             self.sonuc = self.rakamlar
             self.devir = Devir(data["devretti"], data["devirSayisi"], data["haftayaDevredenTutar"])
             self.hasilat = float(data["hasilat"])
+            self.ikramiye = float(data["ikramiyeEH"])
             self.bilenler = [Bilen(i["kisiBasinaDusenIkramiye"], i["kisiSayisi"], i["tur"]) for i in data["bilenKisiler"]]
             self.il_ilce = [IlIlce(i["ilView"], i["ilceView"]) for i in data["buyukIkrKazananIlIlceler"]]
     def devird(self):
@@ -131,6 +134,7 @@ class SansTopuSonuc:
 class TopSonuc:
     """Diğer çekilişlerin sonuçları ve bilgileri"""
     def __init__(self, json_str, tur):
+        self.j_data = json_str
         self.tur = tur
         self.tur_str = tur_isimler[tur]
         s_dict = json.loads(json_str)
@@ -144,6 +148,7 @@ class TopSonuc:
             self.sonuc = self.rakamlar
             self.devir = Devir(data["devretti"], data["devirSayisi"], data["haftayaDevredenTutar"])
             self.hasilat = float(data["hasilat"])
+            self.ikramiye = float(data["ikramiyeEH"])
             self.bilenler = [Bilen(i["kisiBasinaDusenIkramiye"], i["kisiSayisi"], i["tur"]) for i in
                              data["bilenKisiler"]]
             self.il_ilce = [IlIlce(i["ilView"], i["ilceView"]) for i in data["buyukIkrKazananIlIlceler"]]
