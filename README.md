@@ -15,7 +15,7 @@
 # Örnekler
 Basit derecede örnekler için /ornekler konumuna bakabilirsiniz.
 
-# Dokümantasyon (v0.0.5)
+# Dokümantasyon (v0.0.6)
 ## Çekiliş Türleri
 
  - `mpiyango.cekilis_turleri.piyango` (Piyango)
@@ -79,9 +79,10 @@ Piyango çekilişinin sonucu ve bilgileri.
 - **sonuc** *(list[`int`])*: bkz. **rakamlar**
 - **sanslirakam** *(int)*: Şanslı rakam
 - **devir** *(Devir)*: Devretme verileri
- - **hasilat** *(float)*: Elde edilen son hasılat
-  - **bilenler** *(list[`Bilen`])*: Listede numaraları bilenlerin istatistikleri
-  - **il_ilce** *(`IlIlce`)*: Bilen il ve ilçeler
+- **hasilat** *(float)*: Elde edilen son hasılat
+- **ikramiye** *(float)*: Devirlerle birlikte o haftanın ikramiyesi
+- **bilenler** *(list[`Bilen`])*: Listede numaraları bilenlerin istatistikleri
+- **il_ilce** *(`IlIlce`)*: Bilen il ve ilçeler
 - **devird(`numara(int/str)`)**: Devir verilerini sözlük elemanı olarak verir. (bkz. **Devir -> d()**)
 - **b_liste()**: Bilen verilerini (kişi başı ikramiye vs.) sözlük listesi olarak verir.  (bkz. **Bilen-> d()**)
 
@@ -94,9 +95,10 @@ Diğer çekilişlerin sonuçları ve bilgileri.
 - **rakamlar** *(list[`int`])*: Kazanan rakamlar
 - **sonuc** *(list[`int`])*: bkz. **rakamlar**
 - **devir** *(`Devir`)*: Devretme verileri
- - **hasilat** *(float)*: Elde edilen son hasılat
-  - **bilenler** *(list[`Bilen`])*: Listede numaraları bilenlerin istatistikleri
-  - **il_ilce** *(`IlIlce`)*: Bilen il ve ilçeler
+- **hasilat** *(float)*: Elde edilen son hasılat
+- **ikramiye** *(float)*: Devirlerle birlikte o haftanın ikramiyesi
+- **bilenler** *(list[`Bilen`])*: Listede numaraları bilenlerin istatistikleri
+- **il_ilce** *(`IlIlce`)*: Bilen il ve ilçeler
 - **devird(`numara(int/str)`)**: Devir verilerini sözlük elemanı olarak verir. (bkz. **Devir -> d()**)
 - **b_liste()**: Bilen verilerini (kişi başı ikramiye vs.) sözlük listesi olarak verir.  (bkz. **Bilen-> d()**)
 
