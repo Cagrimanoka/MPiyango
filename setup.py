@@ -1,11 +1,11 @@
 from setuptools import setup
 
-with open("README.md", 'r', encoding="utf8") as f:
+with open("README", 'r', encoding="utf8") as f:
     long_description = f.read()
 
 setup(
    name='mpiyango',
-   version='0.0.6',
+   version='0.0.7',
    description='A module to get various lottery data from National Lottery Administration of Turkey (in Turkish)',
    license="MIT",
    long_description=long_description,
