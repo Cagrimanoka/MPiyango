@@ -8,6 +8,13 @@
 3. Sayısal Loto
 4. Süper Loto
 5. Şans Topu
+6. Para Loto
+7. Süper Piyango
+8. Banko Piyango
+9. Süper Sayısal Loto
+10. Süper Şans Topu
+11. Süper On Numara
+
 
 # Nasıl Kurulur?
     pip install mpiyango
@@ -15,7 +22,7 @@
 # Örnekler
 Basit derecede örnekler için /ornekler konumuna bakabilirsiniz.
 
-# Dokümantasyon (v0.0.7)
+# Dokümantasyon (v0.0.8)
 ## Çekiliş Türleri
 
  - `mpiyango.cekilis_turleri.piyango` (Piyango)
@@ -23,6 +30,12 @@ Basit derecede örnekler için /ornekler konumuna bakabilirsiniz.
  - `mpiyango.cekilis_turleri.sayisal` (Sayısal Loto)
  - `mpiyango.cekilis_turleri.superloto` (Süper Loto)
  - `mpiyango.cekilis_turleri.sanstopu` (Şans Topu)
+ - `mpiyango.cekilis_turleri.paraloto` (Para Loto)
+ - `mpiyango.cekilis_turleri.superpiyango` (Süper Piyango)
+ - `mpiyango.cekilis_turleri.bankopiyango` (Banko Piyango)
+ - `mpiyango.cekilis_turleri.supersayisal` (Süper Sayısal Loto)
+ - `mpiyango.cekilis_turleri.supersanstopu` (Süper Şans Topu)
+ - `mpiyango.cekilis_turleri.superonnumara` (Süper On Numara)
 
 ## Sınıflar
 ### `Tarih`
