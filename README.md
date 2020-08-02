@@ -22,7 +22,7 @@
 # Örnekler
 Basit derecede örnekler için /ornekler konumuna bakabilirsiniz.
 
-# Dokümantasyon (v0.0.8)
+# Dokümantasyon (v0.0.9)
 ## Çekiliş Türleri
 
  - `mpiyango.cekilis_turleri.piyango` (Piyango)
@@ -72,8 +72,8 @@ Basit derecede örnekler için /ornekler konumuna bakabilirsiniz.
 
 ### `PiyangoSonuc` 
 Piyango çekilişinin sonucu ve bilgileri.
-- **tur** *(mpiyango.cekilis_turleri.piyango)*
-- **tur_str** *(str="Milli Piyango")*:  Çekiliş türü ismi
+- **tur** *(mpiyango.cekilis_turleri.x)*  bkz. **Çekiliş Türleri**
+- **tur_str** *(str)*: Çekiliş türü ismi
 - **ad** *(str)*: Çekiliş adı (örn. `"19/11/2019 BİLET KONTROL ŞUBE MÜDÜRLÜĞÜ GERÇEK"`)
 - **tarih** *(`Tarih`)*: Çekiliş tarihi
 - **hanesayisi** *(int)*: Çekiliş hane sayısı
@@ -84,8 +84,8 @@ Piyango çekilişinin sonucu ve bilgileri.
 
 ### `SansTopuSonuc` 
 Şans Topu çekilişinin sonucu ve bilgileri.
-- **tur** *(mpiyango.cekilis_turleri.sanstopu)*
-- **tur_str** *(str="Şans Topu")*: Çekiliş türü ismi
+- **tur** *(mpiyango.cekilis_turleri.x)*  bkz. **Çekiliş Türleri**
+- **tur_str** *(str)*: Çekiliş türü ismi
 - **hafta** *(int)*:Çekiliş hafta numarası
 - **tarih** *(Tarih)*:Çekiliş tarihi
 - **rakamlar** *(list[`int`])*: Sondaki rakam şanslı rakam olmak üzere kazanan rakamlar
